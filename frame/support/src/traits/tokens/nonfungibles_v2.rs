@@ -152,6 +152,16 @@ pub trait Inspect<AccountId> {
 	}
 }
 
+/// Trait for providing an interface to read-only the role of NFT-like.
+pub trait InspectRole<AccountId>: Inspect<AccountId> {
+	// Return `true` if collection issuer.
+	fn is_issuer(collection: &Self::CollectionId, who: &AccountId) -> bool;
+	// Return `true` if collection admin.
+	fn is_admin(collection: &Self::CollectionId, who: &AccountId) -> bool;
+	// Return `true` if collection freezer.
+	fn is_freezer(collection: &Self::CollectionId, who: &AccountId) -> bool;
+}
+
 /// Interface for enumerating items in existence or owned by a given account over many collections
 /// of NFTs.
 pub trait InspectEnumerable<AccountId>: Inspect<AccountId> {
